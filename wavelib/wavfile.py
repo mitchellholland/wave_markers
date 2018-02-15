@@ -271,7 +271,7 @@ def write(filename, rate, data, bitrate=None, markers=None, loops=None, pitch=No
     fid.write(struct.pack('<ihHIIHH', 16, 1, noc, rate, sbytes, ba, bits))
 
     fid.write(b'data')
-    fid.write(struct.pack('<i', data.nbytes))
+    fid.write(struct.pack('<I', data.nbytes))
     import sys
     if data.dtype.byteorder == '>' or (data.dtype.byteorder == '=' and sys.byteorder == 'big'):
         data = data.byteswap()
@@ -330,5 +330,5 @@ def write(filename, rate, data, bitrate=None, markers=None, loops=None, pitch=No
     #  position at start of the file.
     size = fid.tell()
     fid.seek(4)
-    fid.write(struct.pack('<i', size-8))
+    fid.write(struct.pack('<I', size-8))
     fid.close()
